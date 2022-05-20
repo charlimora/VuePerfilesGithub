@@ -21,23 +21,24 @@
             <h1 class="content__title">Búsqueda de Usuarios en GitHub</h1>
             <!-- Search -->
             <form class="search" v-on:submit.prevent="Buscar">
-                <input v-model="busqueda" type="text" class="search__input" required placeholder="Search GitHub users">
-                <input type="submit" class="search__submit" value="Search">
+                <input v-model="busqueda" type="text" class="search__input" required placeholder="Buscar Usuarios de GitHub">
+                <input type="submit" class="search__submit" value="Buscar">
             </form>
 
             <!-- Result -->  
-            <div class="result" v-show="result">
-                <h2 class="result__name">Carlos Mora</h2>
-                <img src="foto.png" alt="" class="result__avatar">
-                <p class="result__bio">Instructor SENA, orientado al Desarrollo web en Backend.
-                    Practicante del cristianismo.
+            <div class="result" v-if="result">
+                <h2 class="result__name">{{result.name}}</h2>
+                <img v-bind:src="result.avatar_url" v-bind:alt="result.name" class="result__avatar">
+                <p class="result__bio">{{result.bio}}
                     <br>
-                    <a href="https://www.sena.edu.co" class="result__blog">www.sena.edu.co</a>
+                    <a href="https://www.sena.edu.co" target="_blank" class="result__blog">www.sena.edu.co</a>
                 </p>
             </div>
 
+            <p v-else>Esperando por la búsqueda</p>
+
             <!-- Error -->
-            <div v-show="error" class="result__error"></div>
+            <div v-show="error" class="result__error">{{error}}</div>
         </article>
     </div>
     <script src="js/main.js"></script>

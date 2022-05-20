@@ -47,7 +47,7 @@ body {
 /* Result */
 .result {
   position: relative;
-  background-color: purple;
+  background-color: rgb(23, 148, 176);
   border-radius: 0.3rem;
   box-shadow: 2px 2px 3px gray;
   color: white;
@@ -93,7 +93,7 @@ body {
 
 .result__error {
   padding: 0.3rem;
-  background-color: tomato;
+  background-color: rgb(231, 95, 71);
   color: white;
   text-align: center;
   border: 1px solid red;
