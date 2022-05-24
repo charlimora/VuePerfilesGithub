@@ -34,8 +34,10 @@ const app = Vue.createApp({
             el id y ademas, toda la información que viene en result que tras hacer la búsqueda 
             almancena la info del data como ya se programó anteriormente*/
             this.favoritos.set(this.result.id, this.result)
-
-      }
+      },
+      RemoverFavorito(){
+                this.favoritos.delete(this.result.id)
+  }
 
       }
 });

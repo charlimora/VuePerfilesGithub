@@ -27,7 +27,10 @@
 
             <!-- Result -->  
             <div class="result" v-if="result">
-                <a href="" class="result__toggle-favorite" @click.prevent="addFavorito">Añadir Favorito
+                <a v-if="favoritos.has(result.id)" href="" class="result__toggle-favorite" 
+                @click.prevent="RemoverFavorito">Remover Favorito
+                    <img src="icono estrella.png" width="30" height="30" alt=""></a>
+                <a v-else href="" class="result__toggle-favorite" @click.prevent="addFavorito">Añadir Favorito
                     <img src="icono estrella.png" width="30" height="30" alt=""></a>
                 <h2 class="result__name">{{result.name}}</h2>
                 <img v-bind:src="result.avatar_url" v-bind:alt="result.name" class="result__avatar">
