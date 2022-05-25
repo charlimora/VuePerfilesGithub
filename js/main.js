@@ -9,6 +9,16 @@ const app = Vue.createApp({
           favoritos:new Map()
         };
       },
+
+      computed: {
+        esFavorito() {
+          return this.favoritos.has(this.result.id)
+        },
+        TodosFavoritos(){
+          return Array.from(this.favoritos.values())
+        }
+      },
+
       methods: {
           async Buscar(){
             //con la siguiente línea empezamos limpiando todo
