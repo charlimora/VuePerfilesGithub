@@ -10,6 +10,15 @@ const app = Vue.createApp({
         };
       },
 
+        created() {
+          const FavoritosGuardados = JSON.parse(window.localStorage.getItem("favoritos"))
+          //console.log(FavoritosGuardados)
+          if(FavoritosGuardados.length){
+            const favoritos = new Map(FavoritosGuardados.map(favorito=>[favorito.id, favorito]))
+            this.favoritos = favoritos
+          }
+      },
+
       computed: {
         esFavorito() {
           return this.favoritos.has(this.result.id)
