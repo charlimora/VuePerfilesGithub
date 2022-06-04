@@ -10,19 +10,20 @@ const app = Vue.createApp({
         };
       },
 
-        created() {
-          const FavoritosGuardados = JSON.parse(window.localStorage.getItem("favoritos"))
-          //console.log(FavoritosGuardados)
-          if(FavoritosGuardados.length){
-            const favoritos = new Map(FavoritosGuardados.map(favorito=>[favorito.id, favorito]))
-            this.favoritos = favoritos
-          }
+      created(){
+        const FavoritosGuardados = JSON.parse(window.localStorage.getItem("misfavoritos"))
+  
+       if(FavoritosGuardados.length){
+        const favoritRebuild = new Map(FavoritosGuardados.map(alias=>[alias.id,alias]))
+        this.favoritos = favoritRebuild //esto solo sucederá si hay algo en localStorage
+       }    
       },
 
-      computed: {
+      computed: { //prpiedades computadas
         esFavorito() {
           return this.favoritos.has(this.result.id)
         },
+
         TodosFavoritos(){
           return Array.from(this.favoritos.values())
         }
@@ -46,7 +47,7 @@ const app = Vue.createApp({
             } finally {
               this.busqueda = null
             }
-      },  //aquí se cierra el método Buscar, se pone coma y seguimos con...
+          },  //aquí se cierra el método Buscar, se pone coma y seguimos con...
 
           addFavorito(){
             /*con set establecemos unos valores para el map favoritos, los cuales serán
@@ -54,16 +55,20 @@ const app = Vue.createApp({
             almancena la info del data como ya se programó anteriormente*/
             this.favoritos.set(this.result.id, this.result)
             this.updateStorage()
-      },
+          },
           RemoverFavorito(){
             this.favoritos.delete(this.result.id)
             this.updateStorage()
+          } ,
 
-      } ,
+          MostrarFavorito(parametro){
+          //cambio el valor de result por el valor del parámetro que es lo que el usuario va a seleccionar
+            this.result = parametro
+          },
 
           updateStorage(){
-           window.localStorage.setItem('favoritos', JSON.stringify(this.TodosFavoritos))
-      }
+           window.localStorage.setItem('misfavoritos', JSON.stringify(this.TodosFavoritos))
+          }
 
       }
 });

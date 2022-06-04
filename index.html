@@ -16,9 +16,9 @@
         <div class="favorites">
            <!-- <div class="favorito" v-for="[, favorito] in favoritos">-->
             <div class="favorito" v-for="favorito in TodosFavoritos">
-                <a href="#">
+                <a @click.prevent="MostrarFavorito(favorito)" href="#"><!--es un link representado con una imagen en pantalla-->
                     <img v-bind:src="favorito.avatar_url" v-bind:alt="favorito.name" class="favorite__avatar">
-                </a>
+                </a>    
             </div>
         </div>
 
