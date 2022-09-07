@@ -15,11 +15,13 @@
         <!-- Favorites -->
         <div class="favorites">
            <!-- <div class="favorito" v-for="[, favorito] in favoritos">-->
-            <div class="favorito" v-for="favorito in TodosFavoritos">
-                <a @click.prevent="MostrarFavorito(favorito)" href="#"><!--es un link representado con una imagen en pantalla-->
-                    <img v-bind:src="favorito.avatar_url" v-bind:alt="favorito.name" class="favorite__avatar">
-                </a>    
-            </div>
+            <transition-group name="list">
+                <div class="favorito" v-for="favorito in TodosFavoritos" :key="favorito.id">
+                    <a @click.prevent="MostrarFavorito(favorito)" href="#"><!--es un link representado con una imagen en pantalla-->
+                        <img v-bind:src="favorito.avatar_url" v-bind:alt="favorito.name" class="favorite__avatar">
+                    </a>    
+                </div>
+            </transition-group>           
         </div>
 
         <!-- Content -->
@@ -31,24 +33,26 @@
                 <input type="submit" class="search__submit" value="Buscar">
             </form>
 
-            <!-- Result -->  
-            <div class="result" v-if="result">
-               <!-- <a v-if="favoritos.has(result.id)" href="" class="result__toggle-favorite" 
-                @click.prevent="RemoverFavorito">Remover Favorito
-                    <img src="icono estrella.png" width="30" height="30" alt=""></a> -->
-                <a v-if="esFavorito" href="" class="result__toggle-favorite" 
-                @click.prevent="RemoverFavorito">Remover Favorito
-                    <img src="icono estrella.png" width="30" height="30" alt=""></a>
-                <a v-else href="" class="result__toggle-favorite" @click.prevent="addFavorito">Añadir Favorito
-                    <img src="icono estrella.png" width="30" height="30" alt=""></a>
+            <!-- Result -->
+            <transition> 
+                <div class="result" v-if="result">
+                <!-- <a v-if="favoritos.has(result.id)" href="" class="result__toggle-favorite" 
+                    @click.prevent="RemoverFavorito">Remover Favorito
+                        <img src="icono estrella.png" width="30" height="30" alt=""></a> -->
+                    <a v-if="esFavorito" href="" class="result__toggle-favorite" 
+                    @click.prevent="RemoverFavorito">Remover Favorito
+                        <img src="icono estrella.png" width="30" height="30" alt=""></a>
+                    <a v-else href="" class="result__toggle-favorite" @click.prevent="addFavorito">Añadir Favorito
+                        <img src="icono estrella.png" width="30" height="30" alt=""></a>
 
-                <h2 class="result__name">{{result.name}}</h2>
-                <img v-bind:src="result.avatar_url" v-bind:alt="result.name" class="result__avatar">
-                <p class="result__bio">{{result.bio}}
-                    <br>
-                    <a href="https://www.sena.edu.co" target="_blank" class="result__blog">www.sena.edu.co</a>
-                </p>
-            </div>
+                    <h2 class="result__name">{{result.name}}</h2>
+                    <img v-bind:src="result.avatar_url" v-bind:alt="result.name" class="result__avatar">
+                    <p class="result__bio">{{result.bio}}
+                        <br>
+                        <a href="https://www.sena.edu.co" target="_blank" class="result__blog">www.sena.edu.co</a>
+                    </p>
+                </div>
+            </transition>
 
             <p v-else>Esperando por la búsqueda</p>
 

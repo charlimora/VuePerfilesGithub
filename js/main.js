@@ -13,7 +13,7 @@ const app = Vue.createApp({
       created(){
         const FavoritosGuardados = JSON.parse(window.localStorage.getItem("misfavoritos"))
   
-       if(FavoritosGuardados.length){
+       if(FavoritosGuardados?.length){
         const favoritRebuild = new Map(FavoritosGuardados.map(alias=>[alias.id,alias]))
         this.favoritos = favoritRebuild //esto solo sucederá si hay algo en localStorage
        }    
